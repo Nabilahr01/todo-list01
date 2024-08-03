@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World</title>
+  <link href='/style.css' rel='stylesheet'>
+</head>
+<body>
+  <div class="container">
+    <section class="hero is-info">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">Todo</h1>
+          <h2 class="subtitle">List of tasks</h2>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container">
+    <form action="#" onsubmit="add(event)">
+      <input type="text" id="new_text" />
+      <button type="submit">Add</button>
+    </form>
+
+    <ul id="todo"></ul>
+  </div>
+
+  <script>
+    const todo = document.getElementById('todo');
+
+    function add(event) {
+      event.preventDefault();
+      let newText = document.getElementById('new_text');
+
+      if (newText.value.trim() !== '') {
+        let newTodo = `
+          <li>
+            <span onclick='toggle(this)'>${newText.value}</span>
+            <span onclick='removeItem(this)'> [X] </span>
+          </li>
+        `;
+
+        todo.insertAdjacentHTML('afterbegin', newTodo);
+        newText.value = '';
+      } else {
+        console.log('Please enter a task');
+      }
+    }
+
+    function toggle(el) {
+      el.classList.toggle('done');
+    }
+
+    function removeItem(el) {
+      el.parentElement.remove();
+    }
+  </script>
+</body>
+</html>
